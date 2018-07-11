@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Data_Access_Layer.Interfaces
 {
-    interface IUnitOfWork
+    public interface IUnitOfWork
     {
+        IRepository<T> GetRepository<T>() where T : class;
         void SaveChanges();
     }
 }

@@ -62,7 +62,7 @@
     <Compile Include="Repositories\PlaneTypeRepository.cs" />
     <Compile Include="Repositories\StewardessRepository.cs" />
     <Compile Include="Repositories\TicketRepository.cs" />
-    <Compile Include="UnitOfWorks.cs" />
+    <Compile Include="AirportUnitOfWork.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
