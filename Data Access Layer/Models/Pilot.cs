@@ -13,6 +13,6 @@ namespace Data_Access_Layer.Models
 
         public string Surname { get; set; }
 
-        public TimeSpan Experience { get; set; }
+        public int Experience { get; set; }
     }
 }

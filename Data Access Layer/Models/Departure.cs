@@ -13,6 +13,6 @@ namespace Data_Access_Layer.Models
 
         public DateTime TimeOfDeparture { get; set; }
 
-        public Crew crew { get; set; }
+        public Crew Crew { get; set; }
     }
 }
