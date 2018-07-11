@@ -17,6 +17,6 @@ namespace Data_Access_Layer.Models
 
         public DateTime ArrivalTime { get; set; }
 
-        public Ticket Ticket { get; set; }
+        public List<Ticket> Tickets { get; set; }
     }
 }

@@ -196,6 +196,13 @@ namespace Data_Access_Layer
                 Price = 1060
             };
 
+            Ticket ticket5 = new Ticket
+            {
+                Id = 4,
+                RaceNumber = 2,
+                Price = 1060
+            };
+
             TicketRepository.Create(ticket1);
             TicketRepository.Create(ticket2);
             TicketRepository.Create(ticket3);
@@ -207,7 +214,10 @@ namespace Data_Access_Layer
                 ArrivalTime = new DateTime(2018, 12, 13),
                 DepartureFrom = "Kyiv",
                 Destiation = "Tokio",
-                Ticket = ticket2,
+                Tickets = new List<Ticket>()
+                {
+                    ticket2
+                },
                 TimeOfDeparture = new DateTime(2018, 12, 12)
             });
 
@@ -217,7 +227,10 @@ namespace Data_Access_Layer
                 ArrivalTime = new DateTime(2018, 07, 18),
                 DepartureFrom = "Paris",
                 Destiation = "Dublin",
-                Ticket = ticket2,
+                Tickets = new List<Ticket>()
+                {
+                    ticket1, ticket5
+                },
                 TimeOfDeparture = new DateTime(2018, 07, 18)
             });
 
@@ -227,7 +240,10 @@ namespace Data_Access_Layer
                 ArrivalTime = new DateTime(2018, 03, 04),
                 DepartureFrom = "London",
                 Destiation = "Lviv",
-                Ticket = ticket2,
+                Tickets = new List<Ticket>()
+                {
+                    ticket4
+                },
                 TimeOfDeparture = new DateTime(2018, 03, 03)
             });
 
@@ -237,7 +253,10 @@ namespace Data_Access_Layer
                 ArrivalTime = new DateTime(2018, 08, 09),
                 DepartureFrom = "Oslo",
                 Destiation = "Kyiv",
-                Ticket = ticket2,
+                Tickets = new List<Ticket>()
+                {
+                    ticket3
+                },
                 TimeOfDeparture = new DateTime(2018, 08, 07)
             });
 

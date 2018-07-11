@@ -19,6 +19,6 @@ namespace Shared.DTOs
 
         public DateTime ArrivalTime { get; set; }
 
-        public Ticket Ticket { get; set; }
+        public List<Ticket> Tickets { get; set; }
     }
 }
