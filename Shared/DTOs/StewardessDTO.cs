@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace Data_Access_Layer.Models
+namespace Shared.DTOs
 {
-    public class Pilot
+    public class StewardessDTO
     {
         public int Id { get; set; }
 
@@ -13,6 +14,6 @@ namespace Data_Access_Layer.Models
 
         public string Surname { get; set; }
 
-        public int Experience { get; set; }
+        public DateTime DateOfBirth { get; set; }
     }
 }

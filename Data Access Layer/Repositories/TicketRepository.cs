@@ -10,11 +10,14 @@ namespace Data_Access_Layer.Repositories
 {
     class TicketRepository : IRepository<Ticket>
     {
-        private List<Ticket> _tickets;
+        static private List<Ticket> _tickets;
 
         public TicketRepository()
         {
-            _tickets = new List<Ticket>();
+            if (_tickets == null)
+            {
+                _tickets = new List<Ticket>();
+            }
         }
 
         public void Create(Ticket item)
