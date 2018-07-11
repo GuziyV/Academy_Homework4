@@ -10,11 +10,14 @@ namespace Data_Access_Layer.Repositories
 {
     class StewardessRepository : IRepository<Stewardess>
     {
-        private List<Stewardess> _stewardesses;
+        static private List<Stewardess> _stewardesses;
 
         public StewardessRepository()
         {
-            _stewardesses = new List<Stewardess>();
+            if (_stewardesses == null)
+            {
+                _stewardesses = new List<Stewardess>();
+            }
         }
 
         public void Create(Stewardess item)
@@ -38,7 +41,7 @@ namespace Data_Access_Layer.Repositories
         }
 
         public void Update(Stewardess item)
-        {sdsada
+        {
             Stewardess updateItem = _stewardesses.First(s => s.Id == item.Id);
             updateItem = item;
         }

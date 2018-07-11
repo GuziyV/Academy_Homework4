@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Data_Access_Layer
 {
-    class AiroportUnitOfWorks : IUnitOfWork
+    class AirportUnitOfWorks : IUnitOfWork
     {
-        public AiroportUnitOfWorks()
+        public AirportUnitOfWorks()
         {
             Seed();
         }

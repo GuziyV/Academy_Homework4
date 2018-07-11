@@ -13,6 +13,12 @@ namespace Data_Access_Layer.Models
 
         public DateTime ReleaseDate { get; set; }
 
-        public TimeSpan LifeTime { get; set; }
+        public TimeSpan LifeTime
+        {
+            get
+            {
+                return DateTime.Now - ReleaseDate;
+            }
+        }
     }
 }
