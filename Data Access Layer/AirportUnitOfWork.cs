@@ -9,11 +9,51 @@ using System.Threading.Tasks;
 
 namespace Data_Access_Layer
 {
-    class AirportUnitOfWorks : IUnitOfWork
+    public class AirportUnitOfWork : IUnitOfWork
     {
-        public AirportUnitOfWorks()
+        public AirportUnitOfWork()
         {
             Seed();
+        }
+
+        public IRepository<T> GetRepository<T>() where T: class
+        {
+            if(typeof(T) == typeof(Flight))
+            {
+                return (IRepository<T>)FlightRepository;
+            }
+            else if (typeof(T) == typeof(Crew))
+            {
+                return (IRepository<T>)CrewRepository;
+            }
+            else if (typeof(T) == typeof(Departure))
+            {
+                return (IRepository<T>)DepartureRepository;
+            }
+            else if (typeof(T) == typeof(Pilot))
+            {
+                return (IRepository<T>)PilotRepository;
+            }
+            else if (typeof(T) == typeof(Plane))
+            {
+                return (IRepository<T>)PlaneRepository;
+            }
+            else if (typeof(T) == typeof(PlaneType))
+            {
+                return (IRepository<T>)PlaneTypeRepository;
+            }
+            else if (typeof(T) == typeof(Stewardess))
+            {
+                return (IRepository<T>)StewardessRepository;
+            }
+            else if (typeof(T) == typeof(Ticket))
+            {
+                return (IRepository<T>)TicketRepository;
+            }
+            else
+            {
+                throw new TypeAccessException("Wrong type of repo");
+            }
         }
 
         private FlightRepository flightRepository;
@@ -87,7 +127,7 @@ namespace Data_Access_Layer
         {
             get
             {
-                if (PlaneTypeRepository == null)
+                if (planeTypeRepository == null)
                 {
                     planeTypeRepository = new PlaneTypeRepository();
                 }
@@ -207,7 +247,7 @@ namespace Data_Access_Layer
                 Id = 1,
                 Name = "StName1",
                 Surname = "StSurname1",
-                DateOfBirth = new DateTime(48, 9, 1993)
+                DateOfBirth = new DateTime(1993, 9, 8)
             };
 
             Stewardess stewardess2 = new Stewardess()
@@ -215,7 +255,7 @@ namespace Data_Access_Layer
                 Id = 2,
                 Name = "StName2",
                 Surname = "StSurname2",
-                DateOfBirth = new DateTime(9, 4, 1993)
+                DateOfBirth = new DateTime(1992, 4, 2)
             };
 
             Stewardess stewardess3 = new Stewardess()
@@ -223,7 +263,7 @@ namespace Data_Access_Layer
                 Id = 3,
                 Name = "StName3",
                 Surname = "StSurname3",
-                DateOfBirth = new DateTime(8, 11, 1993)
+                DateOfBirth = new DateTime(1993, 11, 30)
             };
 
             Stewardess stewardess4 = new Stewardess()
@@ -231,7 +271,7 @@ namespace Data_Access_Layer
                 Id = 4,
                 Name = "StName4",
                 Surname = "StSurname4",
-                DateOfBirth = new DateTime(5, 10, 1990)
+                DateOfBirth = new DateTime(1994, 10, 25)
             };
 
             Stewardess stewardess5 = new Stewardess()
@@ -239,7 +279,7 @@ namespace Data_Access_Layer
                 Id = 5,
                 Name = "StName5",
                 Surname = "StSurname5",
-                DateOfBirth = new DateTime(19, 8, 1989)
+                DateOfBirth = new DateTime(1989, 8, 3)
             };
 
             Stewardess stewardess6 = new Stewardess()
@@ -247,7 +287,7 @@ namespace Data_Access_Layer
                 Id = 6,
                 Name = "StName6",
                 Surname = "StSurname6",
-                DateOfBirth = new DateTime(6, 11, 1994)
+                DateOfBirth = new DateTime(1994, 9, 15)
             };
 
             Stewardess stewardess7 = new Stewardess()
@@ -255,7 +295,7 @@ namespace Data_Access_Layer
                 Id = 7,
                 Name = "StName7",
                 Surname = "StSurname7",
-                DateOfBirth = new DateTime(18, 12, 1991)
+                DateOfBirth = new DateTime(1993, 9, 12)
             };
 
             StewardessRepository.Create(stewardess1);
@@ -425,28 +465,28 @@ namespace Data_Access_Layer
             {
                 Id = 1,
                 PlaneType = planeType3,
-                ReleaseDate = new DateTime(11, 9, 2003)
+                ReleaseDate = new DateTime(2003, 11, 9)
             };
 
             Plane plane2 = new Plane()
             {
                 Id = 2,
                 PlaneType = planeType1,
-                ReleaseDate = new DateTime(21, 11, 2002)
+                ReleaseDate = new DateTime(2002, 10, 10)
             };
 
             Plane plane3 = new Plane()
             {
                 Id = 3,
                 PlaneType = planeType4,
-                ReleaseDate = new DateTime(30, 9, 2004)
+                ReleaseDate = new DateTime(2004, 9, 30)
             };
 
             Plane plane4 = new Plane()
             {
                 Id = 4,
                 PlaneType = planeType2,
-                ReleaseDate = new DateTime(8, 11, 2001)
+                ReleaseDate = new DateTime(2001, 11, 8)
             };
 
             PlaneRepository.Create(plane1);
