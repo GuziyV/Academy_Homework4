@@ -40,10 +40,9 @@ namespace Data_Access_Layer.Repositories
             return _crews;
         }
 
-        public void Update(Crew item)
+        public void Update(int id, Crew item)
         {
-            Crew updateTicket = _crews.First(t => t.Id == item.Id);
-            updateTicket = item;
+            _crews[_crews.FindIndex(i => i.Id == id)] = item;
         }
     }
-}
+    }

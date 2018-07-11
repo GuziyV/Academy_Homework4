@@ -213,7 +213,7 @@ namespace Data_Access_Layer
                 Number = 1,
                 ArrivalTime = new DateTime(2018, 12, 13),
                 DepartureFrom = "Kyiv",
-                Destiation = "Tokio",
+                Destination = "Tokio",
                 Tickets = new List<Ticket>()
                 {
                     ticket2
@@ -226,7 +226,7 @@ namespace Data_Access_Layer
                 Number = 2,
                 ArrivalTime = new DateTime(2018, 07, 18),
                 DepartureFrom = "Paris",
-                Destiation = "Dublin",
+                Destination = "Dublin",
                 Tickets = new List<Ticket>()
                 {
                     ticket1, ticket5
@@ -239,7 +239,7 @@ namespace Data_Access_Layer
                 Number = 3,
                 ArrivalTime = new DateTime(2018, 03, 04),
                 DepartureFrom = "London",
-                Destiation = "Lviv",
+                Destination = "Lviv",
                 Tickets = new List<Ticket>()
                 {
                     ticket4
@@ -252,7 +252,7 @@ namespace Data_Access_Layer
                 Number = 4,
                 ArrivalTime = new DateTime(2018, 08, 09),
                 DepartureFrom = "Oslo",
-                Destiation = "Kyiv",
+                Destination = "Kyiv",
                 Tickets = new List<Ticket>()
                 {
                     ticket3
