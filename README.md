@@ -2,11 +2,12 @@
 Project Structure
 
 ### Flight: 
-GET: /api/flights/:number
+GET: 
+/api/flights/:number
 
-         /api/flights/
+/api/flights/
          
-         /api/flights/routes?from=:departureFrom&to=:destination - рейси з :departureFrom в :destination
+/api/flights/routes?from=:departureFrom&to=:destination - рейси з :departureFrom в :destination
 
 POST: /api/flights/
 
@@ -43,11 +44,12 @@ BODY: {
 DELETE: /api/flights/:number
 
 ### Ticket
-GET: /api/tickets/:id
+GET:
+/api/tickets/:id
 
-         /api/tickets/
+/api/tickets/
          
-        /api/tickets/routes?from=:departureFrom&to=:destination - квитки з :departureFrom в :destination
+/api/tickets/routes?from=:departureFrom&to=:destination - квитки з :departureFrom в :destination
 
 POST: /api/tickets/
 
@@ -72,9 +74,10 @@ BODY: {
 DELETE: /api/ticket/:id
 
 ### Departures
-GET: /api/departures/:id
+GET: 
+/api/departures/:id
 
-         /api/departures/
+/api/departures/
 
 POST: /api/departures/
 
@@ -103,9 +106,10 @@ BODY: {
 DELETE: /api/departures/:id
 
 ### Stewardess
-GET: /api/stewardesses/:id
+GET: 
+/api/stewardesses/:id
 
-         /api/stewardesses/
+/api/stewardesses/
 
 POST: /api/stewardesses/
 
@@ -133,9 +137,10 @@ BODY: {
 DELETE: /api/stewardesses/:id
 
 ### Pilot
-GET: /api/pilots/:id
+GET: 
+/api/pilots/:id
 
-         /api/pilots/
+/api/pilots/
 
 POST: /api/pilots/
 
@@ -168,9 +173,10 @@ BODY: {
 DELETE: /api/pilots/:id
 
 ### Crew
-GET: /api/crews/:id
+GET: 
+/api/crews/:id
 
-         /api/crews/
+/api/crews/
 
 POST: /api/crews/
 
@@ -196,11 +202,12 @@ DELETE: /api/crews/:id
 
 
 ### Plane
-GET: /api/planes/:id
+GET: 
+/api/planes/:id
 
-         /api/planes/model?planemodel=:model - літаки вказаної моделі
+ /api/planes/model?planemodel=:model - літаки вказаної моделі
 
-         /api/planes/
+/api/planes/
 
 POST: /api/planes/
 
@@ -233,9 +240,10 @@ BODY: {
 DELETE: /api/planes/:id
 
 ### PlaneType
-GET: /api/planetypes/:id
+GET: 
+/api/planetypes/:id
 
-         /api/planetypes/
+/api/planetypes/
 
 POST: /api/planetypes/
 
