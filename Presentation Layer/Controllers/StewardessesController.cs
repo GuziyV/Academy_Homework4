@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using AutoMapper;
 using Business_Layer.Services;
 using Data_Access_Layer.Interfaces;
 using Data_Access_Layer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Shared.DTOs;
-
 
 namespace Presentation_Layer.Controllers
 {
@@ -44,16 +45,32 @@ namespace Presentation_Layer.Controllers
 
         // POST api/stewardesses
         [HttpPost]
-        public void Post([FromBody]StewardessDTO stewardess)
+        public HttpResponseMessage Post([FromBody]StewardessDTO stewardess)
         {
-            _service.Post<Stewardess>(Mapper.Map<StewardessDTO, Stewardess>(stewardess));
+            if (ModelState.IsValid && stewardess != null)
+            {
+                _service.Post<Stewardess>(Mapper.Map<StewardessDTO, Stewardess>(stewardess));
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            else
+            {
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            }
         }
 
         // POST api/stewardesses/id
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]StewardessDTO stewardess)
+        public HttpResponseMessage Put(int id, [FromBody]StewardessDTO stewardess)
         {
-            _service.Update<Stewardess>(id, Mapper.Map<StewardessDTO, Stewardess>(stewardess));
+            if (ModelState.IsValid && stewardess != null)
+            {
+                _service.Update<Stewardess>(id, Mapper.Map<StewardessDTO, Stewardess>(stewardess));
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            else
+            {
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            }
         }
 
         // DELETE api/stewardesses/id

@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Shared.DTOs;
+using FluentValidation;
 
 namespace Presentation_Layer
 {
@@ -33,17 +34,9 @@ namespace Presentation_Layer
             services.AddSingleton<IUnitOfWork, AirportUnitOfWork>();
             services.AddMvc();
             services.AddAutoMapper();
+            
 
-            new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Flight, FlightDTO>();
-                cfg.CreateMap<Departure, DepartureDTO>();
-                cfg.CreateMap<Pilot, PilotDTO>();
-                cfg.CreateMap<Plane, PlaneDTO>();
-                cfg.CreateMap<PlaneType, PlaneTypeDTO>();
-                cfg.CreateMap<Stewardess, StewardessDTO>();
-                cfg.CreateMap<Ticket, TicketDTO>();
-            }).CreateMapper();
+            var mapper = MapperConfiguration().CreateMapper();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +48,21 @@ namespace Presentation_Layer
             }
 
             app.UseMvc();
+        }
+
+        public MapperConfiguration MapperConfiguration()
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Flight, FlightDTO>();
+                cfg.CreateMap<Departure, DepartureDTO>();
+                cfg.CreateMap<Pilot, PilotDTO>();
+                cfg.CreateMap<Plane, PlaneDTO>();
+                cfg.CreateMap<PlaneType, PlaneTypeDTO>();
+                cfg.CreateMap<Stewardess, StewardessDTO>();
+                cfg.CreateMap<Ticket, TicketDTO>();
+            });
+            return config;
         }
     }
 }

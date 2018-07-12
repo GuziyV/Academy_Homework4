@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using AutoMapper;
 using Business_Layer.Services;
 using Data_Access_Layer.Interfaces;
 using Data_Access_Layer.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Shared.DTOs;
 
@@ -45,26 +43,34 @@ namespace Presentation_Layer.Controllers
             return Mapper.Map<Ticket, TicketDTO>(_service.GetById<Ticket>(id));
         }
 
-        //GET /api/tickets/routes?departureFrom=:departureFrom&destination=:destination
-        [Route("routes")]
-        [HttpGet]
-        public IEnumerable<TicketDTO> GetByRoute(string departureFrom, string destination)
-        {
-            return Mapper.Map<IEnumerable<Ticket>, IEnumerable<TicketDTO>>(_service.GetTicketsByRoute(departureFrom, destination));
-        }
-
         // POST api/tickets
         [HttpPost]
-        public void Post([FromBody]TicketDTO ticket)
+        public HttpResponseMessage Post([FromBody]TicketDTO ticket)
         {
-            _service.Post<Ticket>(Mapper.Map<TicketDTO, Ticket>(ticket));
+            if (ModelState.IsValid && ticket != null)
+            {
+                _service.Post<Ticket>(Mapper.Map<TicketDTO, Ticket>(ticket));
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            else
+            {
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            }
         }
 
         // POST api/tickets/id
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]TicketDTO ticket)
+        public HttpResponseMessage Put(int id, [FromBody]TicketDTO ticket)
         {
-            _service.Update<Ticket>(id, Mapper.Map<TicketDTO, Ticket>(ticket));
+            if (ModelState.IsValid && ticket != null)
+            {
+                _service.Update<Ticket>(id, Mapper.Map<TicketDTO, Ticket>(ticket));
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            else
+            {
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            }
         }
 
         // DELETE api/tickets/id
