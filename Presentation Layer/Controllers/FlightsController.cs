@@ -37,17 +37,17 @@ namespace Presentation_Layer.Controllers
         [HttpGet]
         public IEnumerable<FlightDTO> Get()
         {
-            return Mapper.Map<IEnumerable<Flight>, IEnumerable<FlightDTO>>(_service.GetAllFlights());
+            return Mapper.Map<IEnumerable<Flight>, IEnumerable<FlightDTO>>(_service.GetAll<Flight>());
         }
 
         [HttpGet("{number}")]
         public FlightDTO Get(int number)
         {
-            return Mapper.Map<Flight, FlightDTO>(_service.GetFlightByNumber(number));
+            return Mapper.Map<Flight, FlightDTO>(_service.GetById<Flight>(number));
         }
 
         // /api/flights/route?departureFrom=:departureFrom&destination=:destination
-        [Route("route")]
+        [Route("routes")]
         [HttpGet]
         public IEnumerable<FlightDTO> GetByRoute(string departureFrom, string destination)
         {
@@ -57,19 +57,19 @@ namespace Presentation_Layer.Controllers
         [HttpPost]
         public void Post([FromBody]FlightDTO flight)
         {
-            _service.PostFlight(Mapper.Map<FlightDTO, Flight>(flight));
+            _service.Post<Flight>(Mapper.Map<FlightDTO, Flight>(flight));
         }
 
         [HttpPut("{number}")]
         public void Put(int number, [FromBody]FlightDTO flight)
         {
-            _service.UpdateFlight(number, Mapper.Map<FlightDTO, Flight>(flight));
+            _service.Update<Flight>(number, Mapper.Map<FlightDTO, Flight>(flight));
         }
 
         [HttpDelete("{number}")]
         public void Delete(int number)
         {
-            _service.DeleteFlight(number);
+            _service.Delete<Flight>(number);
         }
     }
 }

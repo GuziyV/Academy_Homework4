@@ -14,40 +14,65 @@ namespace Business_Layer.Services
         private readonly IUnitOfWork _unitOfWork;
         public AirportService(IUnitOfWork unitOfWork)
         {
-            
-                _unitOfWork = unitOfWork;
-            
+
+            _unitOfWork = unitOfWork;
+
         }
-        //Flights
-        public Flight GetFlightByNumber(int number)
+        #region General
+        public T GetById<T>(int id) where T : class
         {
-            return _unitOfWork.GetRepository<Flight>().Get(number);
+            return _unitOfWork.GetRepository<T>().Get(id);
         }
-        
-        public IEnumerable<Flight> GetAllFlights()
+
+        public IEnumerable<T> GetAll<T>() where T : class
         {
-            return _unitOfWork.GetRepository<Flight>().GetAll();
+            return _unitOfWork.GetRepository<T>().GetAll();
         }
+
+        public void Post<T>(T item) where T : class
+        {
+            _unitOfWork.GetRepository<T>().Create(item);
+        }
+
+        public void Update<T>(int id, T item) where T : class
+        {
+            _unitOfWork.GetRepository<T>().Update(id, item);
+        }
+
+        public void Delete<T>(int number) where T : class
+        {
+            _unitOfWork.GetRepository<T>().Delete(number);
+        }
+        #endregion
+
 
         public IEnumerable<Flight> GetFlightByRoute(string departureFrom, string destination)
         {
-            return GetAllFlights().Where(f => (f.DepartureFrom == departureFrom && f.Destination == destination));
+            return GetAll<Flight>().Where(f =>
+            (f.DepartureFrom == departureFrom && f.Destination == destination));
         }
 
-        public void PostFlight(Flight flight)
+        public IEnumerable<Ticket> GetTicketsByRoute(string departureFrom, string destination)
         {
-            _unitOfWork.GetRepository<Flight>().Create(flight);
+            return GetAll<Ticket>().Where(f =>
+            (GetById<Flight>(f.RaceNumber).DepartureFrom == departureFrom && GetById<Flight>(f.RaceNumber).Destination == destination));
         }
 
-        public void UpdateFlight(int id, Flight flight)
+        public IEnumerable<Plane> GetPlanesByModel(string model)
         {
-            _unitOfWork.GetRepository<Flight>().Update(id, flight);
+            return GetAll<Plane>().Where(p => p.PlaneType.Model == model);
         }
 
-        public void DeleteFlight(int number)
+        public IEnumerable<Plane> GetPlanesByNumberOfSeatsMoreThen(int numberOfSeats)
         {
-            _unitOfWork.GetRepository<Flight>().Delete(number);
+            return GetAll<Plane>().Where(p => p.PlaneType.NumberOfSeats > numberOfSeats);
         }
-        //
+
+        public IEnumerable<Plane> GetPlanesLoadCapacityMoreThen(int loadCapacity)
+        {
+            return GetAll<Plane>().Where(p => p.PlaneType.LoadCapacity > loadCapacity);
+        }
     }
+        
 }
+
