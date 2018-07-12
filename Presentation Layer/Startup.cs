@@ -37,6 +37,12 @@ namespace Presentation_Layer
             new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<Flight, FlightDTO>();
+                cfg.CreateMap<Departure, DepartureDTO>();
+                cfg.CreateMap<Pilot, PilotDTO>();
+                cfg.CreateMap<Plane, PlaneDTO>();
+                cfg.CreateMap<PlaneType, PlaneTypeDTO>();
+                cfg.CreateMap<Stewardess, StewardessDTO>();
+                cfg.CreateMap<Ticket, TicketDTO>();
             }).CreateMapper();
         }
 

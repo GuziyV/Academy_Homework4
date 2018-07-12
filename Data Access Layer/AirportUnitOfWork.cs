@@ -394,6 +394,7 @@ namespace Data_Access_Layer
 
             Crew crew4 = new Crew()
             {
+                Id = 4,
                 Pilot = pilot4,
                 Stewardesses = new List<Stewardess>()
                 {
@@ -432,7 +433,7 @@ namespace Data_Access_Layer
 
             Departure departure4 = new Departure()
             {
-                Id = 1,
+                Id = 4,
                 RaceNumber = 2,
                 Crew = crew4,
                 TimeOfDeparture = new DateTime(2018, 08, 07)

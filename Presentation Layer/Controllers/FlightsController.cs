@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using AutoMapper;
-using Data_Access_Layer;
 using Data_Access_Layer.Interfaces;
 using Data_Access_Layer.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Shared.DTOs;
-using Business_Layer.Interfaces;
 using Business_Layer.Services;
 
 namespace Presentation_Layer.Controllers
@@ -33,20 +27,21 @@ namespace Presentation_Layer.Controllers
             }
         }
 
-        // GET api/values
+        // GET api/flights
         [HttpGet]
         public IEnumerable<FlightDTO> Get()
         {
             return Mapper.Map<IEnumerable<Flight>, IEnumerable<FlightDTO>>(_service.GetAll<Flight>());
         }
 
+        // GET api/flights/id
         [HttpGet("{number}")]
         public FlightDTO Get(int number)
         {
             return Mapper.Map<Flight, FlightDTO>(_service.GetById<Flight>(number));
         }
 
-        // /api/flights/route?departureFrom=:departureFrom&destination=:destination
+        //GET /api/flights/routes?departureFrom=:departureFrom&destination=:destination
         [Route("routes")]
         [HttpGet]
         public IEnumerable<FlightDTO> GetByRoute(string departureFrom, string destination)
@@ -54,18 +49,21 @@ namespace Presentation_Layer.Controllers
             return Mapper.Map<IEnumerable<Flight>, IEnumerable<FlightDTO>>(_service.GetFlightByRoute(departureFrom, destination));
         }
 
+        // POST api/flights
         [HttpPost]
         public void Post([FromBody]FlightDTO flight)
         {
             _service.Post<Flight>(Mapper.Map<FlightDTO, Flight>(flight));
         }
 
+        // POST api/flights/number
         [HttpPut("{number}")]
         public void Put(int number, [FromBody]FlightDTO flight)
         {
             _service.Update<Flight>(number, Mapper.Map<FlightDTO, Flight>(flight));
         }
 
+        // DELETE api/flights/number
         [HttpDelete("{number}")]
         public void Delete(int number)
         {
