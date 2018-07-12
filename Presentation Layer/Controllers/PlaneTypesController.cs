@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using AutoMapper;
 using Business_Layer.Services;
 using Data_Access_Layer.Interfaces;
@@ -43,16 +45,32 @@ namespace Presentation_Layer.Controllers
 
         // POST api/planetypes
         [HttpPost]
-        public void Post([FromBody]PlaneTypeDTO planeType)
+        public HttpResponseMessage Post([FromBody]PlaneTypeDTO planeType)
         {
-            _service.Post<PlaneType>(Mapper.Map<PlaneTypeDTO, PlaneType>(planeType));
+            if (ModelState.IsValid && planeType != null)
+            {
+                _service.Post<PlaneType>(Mapper.Map<PlaneTypeDTO, PlaneType>(planeType));
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            else
+            {
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            }
         }
 
         // POST api/planettypes/id
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]PlaneTypeDTO planeType)
+        public HttpResponseMessage Put(int id, [FromBody]PlaneTypeDTO planeType)
         {
-            _service.Update<PlaneType>(id, Mapper.Map<PlaneTypeDTO, PlaneType>(planeType));
+            if (ModelState.IsValid && planeType != null)
+            {
+                _service.Update<PlaneType>(id, Mapper.Map<PlaneTypeDTO, PlaneType>(planeType));
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            else
+            {
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            }
         }
 
         // DELETE api/planettypes/id

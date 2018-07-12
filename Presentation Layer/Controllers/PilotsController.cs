@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using AutoMapper;
 using Business_Layer.Services;
 using Data_Access_Layer.Interfaces;
@@ -43,16 +45,32 @@ namespace Presentation_Layer.Controllers
 
         // POST api/pilots
         [HttpPost]
-        public void Post([FromBody]PilotDTO pilot)
+        public HttpResponseMessage Post([FromBody]PilotDTO pilot)
         {
-            _service.Post<Pilot>(Mapper.Map<PilotDTO, Pilot>(pilot));
+            if (ModelState.IsValid && pilot != null)
+            {
+                _service.Post<Pilot>(Mapper.Map<PilotDTO, Pilot>(pilot));
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            else
+            {
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            }
         }
 
         // POST api/pilots/id
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]PilotDTO pilot)
+        public HttpResponseMessage Put(int id, [FromBody]PilotDTO pilot)
         {
-            _service.Update<Pilot>(id, Mapper.Map<PilotDTO, Pilot>(pilot));
+            if (ModelState.IsValid && pilot != null)
+            {
+                _service.Update<Pilot>(id, Mapper.Map<PilotDTO, Pilot>(pilot));
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            else
+            {
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            }
         }
 
         // DELETE api/pilots/id

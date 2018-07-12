@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using AutoMapper;
 using Business_Layer.Services;
 using Data_Access_Layer.Interfaces;
 using Data_Access_Layer.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using Shared.DTOs;
 
 namespace Presentation_Layer.Controllers
@@ -43,16 +46,32 @@ namespace Presentation_Layer.Controllers
 
         // POST api/crews
         [HttpPost]
-        public void Post([FromBody]CrewDTO crew)
+        public HttpResponseMessage Post([FromBody]CrewDTO crew)
         {
-            _service.Post<Crew>(Mapper.Map<CrewDTO, Crew>(crew));
+            if(ModelState.IsValid && crew != null)
+            {
+                _service.Post<Crew>(Mapper.Map<CrewDTO, Crew>(crew));
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            else
+            {
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            }
         }
 
         // POST api/crews/id
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]CrewDTO crew)
+        public HttpResponseMessage Put(int id, [FromBody]CrewDTO crew)
         {
-            _service.Update<Crew>(id, Mapper.Map<CrewDTO, Crew>(crew));
+            if (ModelState.IsValid && crew != null)
+            {
+                _service.Update<Crew>(id, Mapper.Map<CrewDTO, Crew>(crew));
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            else
+            {
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            }
         }
 
         // DELETE api/crews/id

@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using AutoMapper;
+using Business_Layer.Services;
 using Data_Access_Layer.Interfaces;
 using Data_Access_Layer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Shared.DTOs;
-using Business_Layer.Services;
 
 namespace Presentation_Layer.Controllers
 {
@@ -51,16 +53,32 @@ namespace Presentation_Layer.Controllers
 
         // POST api/flights
         [HttpPost]
-        public void Post([FromBody]FlightDTO flight)
+        public HttpResponseMessage Post([FromBody]FlightDTO flight)
         {
-            _service.Post<Flight>(Mapper.Map<FlightDTO, Flight>(flight));
+            if (ModelState.IsValid && flight != null)
+            {
+                _service.Post<Flight>(Mapper.Map<FlightDTO, Flight>(flight));
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            else
+            {
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            }
         }
 
         // POST api/flights/number
         [HttpPut("{number}")]
-        public void Put(int number, [FromBody]FlightDTO flight)
+        public HttpResponseMessage Put(int number, [FromBody]FlightDTO flight)
         {
-            _service.Update<Flight>(number, Mapper.Map<FlightDTO, Flight>(flight));
+            if (ModelState.IsValid && flight != null)
+            {
+                _service.Update<Flight>(number, Mapper.Map<FlightDTO, Flight>(flight));
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            else
+            {
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            }
         }
 
         // DELETE api/flights/number

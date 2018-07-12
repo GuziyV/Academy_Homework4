@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using AutoMapper;
 using Business_Layer.Services;
 using Data_Access_Layer.Interfaces;
@@ -42,42 +44,35 @@ namespace Presentation_Layer.Controllers
             return Mapper.Map<Plane, PlaneDTO>(_service.GetById<Plane>(id));
         }
 
-        //GET /api/tickets/model?planemodel=:planeModel
-        [Route("model")]
-        [HttpGet]
-        public IEnumerable<PlaneDTO> GetByMode(string planeModel)
-        {
-            return Mapper.Map<IEnumerable<Plane>, IEnumerable<PlaneDTO>>(_service.GetPlanesByModel(planeModel));
-        }
-
-        //GET /api/tickets/capacity?loadcapacity=:loadcapacity
-        [Route("capacity")]
-        [HttpGet]
-        public IEnumerable<PlaneDTO> GetByCapacity(int loadCapacity)
-        {
-            return Mapper.Map<IEnumerable<Plane>, IEnumerable<PlaneDTO>>(_service.GetPlanesLoadCapacityMoreThen(loadCapacity));
-        }
-
-        //GET /api/tickets/seats?planeseats=:planeseats
-        [Route("seats")]
-        [HttpGet]
-        public IEnumerable<PlaneDTO> GetBySeats(int planeSeats)
-        {
-            return Mapper.Map<IEnumerable<Plane>, IEnumerable<PlaneDTO>>(_service.GetPlanesByNumberOfSeatsMoreThen(planeSeats));
-        }
 
         // POST api/planes
         [HttpPost]
-        public void Post([FromBody]PlaneDTO plane)
+        public HttpResponseMessage Post([FromBody]PlaneDTO plane)
         {
-            _service.Post<Plane>(Mapper.Map<PlaneDTO, Plane>(plane));
+            if (ModelState.IsValid && plane != null)
+            {
+                _service.Post<Plane>(Mapper.Map<PlaneDTO, Plane>(plane));
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            else
+            {
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            }
         }
 
         // POST api/planes/id
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]PlaneDTO plane)
+        public HttpResponseMessage Put(int id, [FromBody]PlaneDTO plane)
         {
-            _service.Update<Plane>(id, Mapper.Map<PlaneDTO, Plane>(plane));
+            if (ModelState.IsValid && plane != null)
+            {
+                _service.Update<Plane>(id, Mapper.Map<PlaneDTO, Plane>(plane));
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            else
+            {
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            }
         }
 
         // DELETE api/planes/id
