@@ -15,10 +15,10 @@ namespace Shared.DTOs
 
         public DateTime TimeOfDeparture { get; set; }
 
-        public string Destiation { get; set; }
+        public string Destination { get; set; }
 
         public DateTime ArrivalTime { get; set; }
 
-        public List<Ticket> Tickets { get; set; }
-    }
+        public List<Ticket> Tickets { get; set; } 
+}
 }

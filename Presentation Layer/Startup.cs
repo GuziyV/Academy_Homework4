@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Business_Layer.Interfaces;
+using Business_Layer.Services;
 using Data_Access_Layer;
 using Data_Access_Layer.Interfaces;
 using Data_Access_Layer.Models;
@@ -35,6 +37,12 @@ namespace Presentation_Layer
             new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<Flight, FlightDTO>();
+                cfg.CreateMap<Departure, DepartureDTO>();
+                cfg.CreateMap<Pilot, PilotDTO>();
+                cfg.CreateMap<Plane, PlaneDTO>();
+                cfg.CreateMap<PlaneType, PlaneTypeDTO>();
+                cfg.CreateMap<Stewardess, StewardessDTO>();
+                cfg.CreateMap<Ticket, TicketDTO>();
             }).CreateMapper();
         }
 

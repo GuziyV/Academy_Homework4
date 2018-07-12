@@ -39,10 +39,9 @@ namespace Data_Access_Layer.Repositories
             return _planes;
         }
 
-        public void Update(Plane item)
+        public void Update(int id, Plane item)
         {
-            Plane updateItem = _planes.FirstOrDefault(p => p.Id == item.Id);
-            updateItem = item;
+            _planes[_planes.FindIndex(i => i.Id == id)] = item;
         }
     }
 }

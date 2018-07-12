@@ -40,10 +40,9 @@ namespace Data_Access_Layer.Repositories
             return _pilots;
         }
 
-        public void Update(Pilot item)
+        public void Update(int id, Pilot item)
         {
-            Pilot updateItem = _pilots.FirstOrDefault(p => p.Id == item.Id);
-            updateItem = item;
+            _pilots[_pilots.FindIndex(i => i.Id == id)] = item;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Data_Access_Layer.Models
 
         public DateTime TimeOfDeparture { get; set; }
 
-        public string Destiation { get; set; }
+        public string Destination { get; set; }
 
         public DateTime ArrivalTime { get; set; }
 
