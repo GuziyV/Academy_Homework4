@@ -54,11 +54,5 @@
     <Compile Include="DTOs\TicketDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Data Access Layer\Data Access Layer.csproj">
-      <Project>{a9a8f76f-1743-402d-b9c5-88f5a0a34d0b}</Project>
-      <Name>Data Access Layer</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

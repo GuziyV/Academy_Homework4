@@ -1,10 +1,5 @@
-﻿using Data_Access_Layer.Models;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Shared.DTOs
 {
@@ -19,7 +14,16 @@ namespace Shared.DTOs
         [Required]
         public DateTime TimeOfDeparture { get; set; }
 
-        [Required]
-        public Crew Crew { get; set; }
+        private CrewDTO crew;
+
+        public CrewDTO GetCrew()
+        {
+            return crew;
+        }
+
+        public void SetCrew(CrewDTO value)
+        {
+            crew = value;
+        }
     }
 }

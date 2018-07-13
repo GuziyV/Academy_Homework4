@@ -1,10 +1,6 @@
-﻿using Data_Access_Layer.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Shared.DTOs
 {
@@ -26,6 +22,6 @@ namespace Shared.DTOs
         public DateTime ArrivalTime { get; set; }
 
         [Required]
-        public List<Ticket> Tickets { get; set; } 
+        public List<TicketDTO> Tickets { get; set; } 
     }
 }
