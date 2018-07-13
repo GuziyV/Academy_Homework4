@@ -14,16 +14,7 @@ namespace Shared.DTOs
         [Required]
         public DateTime TimeOfDeparture { get; set; }
 
-        private CrewDTO crew;
-
-        public CrewDTO GetCrew()
-        {
-            return crew;
-        }
-
-        public void SetCrew(CrewDTO value)
-        {
-            crew = value;
-        }
+        [Required]
+        public CrewDTO Crew { get; set; }
     }
 }
