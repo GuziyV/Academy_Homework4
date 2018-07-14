@@ -17,16 +17,10 @@ namespace Presentation_Layer.Controllers
         private readonly AirportService _service;
         private readonly IMapper _mapper;
 
-        public TicketsController(IUnitOfWork unitOfWork, IMapper mapper)
+        public TicketsController(IMapper mapper, AirportService service)
         {
-            if (_service == null)
-            {
-                _service = new AirportService(unitOfWork);
-            }
-            if (_mapper == null)
-            {
-                _mapper = mapper;
-            }
+            _mapper = mapper;
+            _service = service;
         }
 
         // GET api/tickets

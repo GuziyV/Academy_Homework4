@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Http;
 using AutoMapper;
 using Business_Layer.Services;
+using Business_Layer.Validation;
 using Data_Access_Layer.Interfaces;
 using Data_Access_Layer.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -17,16 +18,10 @@ namespace Presentation_Layer.Controllers
         private readonly AirportService _service;
         private readonly IMapper _mapper;
 
-        public FlightsController(IUnitOfWork unitOfWork, IMapper mapper)
+        public FlightsController(IMapper mapper, AirportService service)
         {
-            if (_service == null)
-            {
-                _service = new AirportService(unitOfWork);
-            }
-            if (_mapper == null)
-            {
-                _mapper = mapper;
-            }
+            _mapper = mapper;
+            _service = service;
         }
 
         // GET api/flights
@@ -57,13 +52,16 @@ namespace Presentation_Layer.Controllers
         {
             if (ModelState.IsValid && flight != null)
             {
-                _service.Post<Flight>(Mapper.Map<FlightDTO, Flight>(flight));
-                return new HttpResponseMessage(HttpStatusCode.OK);
+                var validator = new FlightValidation();
+                if (validator.Validate(Mapper.Map<FlightDTO, Flight>(flight)).IsValid)
+                {
+                    _service.Post<Flight>(Mapper.Map<FlightDTO, Flight>(flight));
+                    return new HttpResponseMessage(HttpStatusCode.OK);
+                }
             }
-            else
-            {
-                return new HttpResponseMessage(HttpStatusCode.BadRequest);
-            }
+
+            return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            
         }
 
         // POST api/flights/number
@@ -72,13 +70,15 @@ namespace Presentation_Layer.Controllers
         {
             if (ModelState.IsValid && flight != null)
             {
-                _service.Update<Flight>(number, Mapper.Map<FlightDTO, Flight>(flight));
-                return new HttpResponseMessage(HttpStatusCode.OK);
+                var validator = new FlightValidation();
+                if (validator.Validate(Mapper.Map<FlightDTO, Flight>(flight)).IsValid)
+                {
+                    _service.Update<Flight>(number, Mapper.Map<FlightDTO, Flight>(flight));
+                    return new HttpResponseMessage(HttpStatusCode.OK);
+                }
             }
-            else
-            {
-                return new HttpResponseMessage(HttpStatusCode.BadRequest);
-            }
+
+            return new HttpResponseMessage(HttpStatusCode.BadRequest);
         }
 
         // DELETE api/flights/number

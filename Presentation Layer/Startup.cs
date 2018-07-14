@@ -32,6 +32,7 @@ namespace Presentation_Layer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IUnitOfWork, AirportUnitOfWork>();
+            services.AddSingleton<AirportService>();
             services.AddMvc();
             services.AddAutoMapper();
             
